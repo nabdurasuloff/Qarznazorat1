@@ -1,0 +1,21 @@
+# Node / Electron
+node_modules/
+frontend/dist/
+frontend/dist_electron/
+
+# Python
+__pycache__/
+*.pyc
+backend/dist/
+backend/build/
+*.spec
+
+# Ma'lumotlar bazasi va yaratilgan hujjatlar — GitHub'ga YUKLANMASLIGI KERAK
+# (mijozlarning shaxsiy ma'lumotlari, maxfiy!)
+*.db
+yaratilgan_xatlar/
+mib_hujjatlar/
+
+# OS
+.DS_Store
+Thumbs.db

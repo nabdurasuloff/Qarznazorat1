@@ -1,0 +1,77 @@
+name: QarzNazorat Windows .exe yig'ish
+
+# Bu ish qachon ishga tushadi:
+# 1) "main" branch'ga push qilinganda avtomatik
+# 2) GitHub sahifasida "Run workflow" tugmasi bosilganda qo'lda
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Kodni olish
+        uses: actions/checkout@v4
+
+      - name: Python o'rnatish
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Node.js o'rnatish
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # ---- 1) Backend (Python) .exe qilib yig'ish ----
+      - name: Backend kutubxonalarini o'rnatish
+        working-directory: backend
+        run: python -m pip install -r requirements.txt
+
+      - name: Backend.exe yig'ish
+        working-directory: backend
+        run: >
+          pyinstaller --noconfirm --onefile --console
+          --name "backend"
+          --add-data "templates;templates"
+          --collect-all "pyxlsb"
+          --collect-all "openpyxl"
+          --collect-all "docx2pdf"
+          --collect-all "pypdf"
+          --collect-all "flask"
+          --collect-all "flask_cors"
+          --hidden-import "win32com"
+          --hidden-import "win32com.client"
+          --hidden-import "win32timezone"
+          --hidden-import "pythoncom"
+          --hidden-import "pywintypes"
+          --collect-all "win32com"
+          server.py
+
+      - name: Backend.exe borligini tekshirish
+        working-directory: backend
+        run: |
+          if (!(Test-Path "dist\backend.exe")) {
+            Write-Error "backend.exe yaratilmadi!"
+            exit 1
+          }
+
+      # ---- 2) Electron (frontend) o'rnatuvchisini yig'ish ----
+      - name: Frontend kutubxonalarini o'rnatish
+        working-directory: frontend
+        run: npm install
+
+      - name: Yakuniy o'rnatuvchini (.exe) yig'ish
+        working-directory: frontend
+        run: npm run build
+
+      # ---- 3) Natijani yuklab olish uchun saqlash ----
+      - name: O'rnatuvchini saqlash (Artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: QarzNazorat-Setup
+          path: frontend/dist/*.exe
+          retention-days: 30
