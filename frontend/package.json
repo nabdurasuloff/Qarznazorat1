@@ -1,0 +1,45 @@
+{
+  "name": "qarz-nazorat",
+  "version": "1.0.0",
+  "description": "Qarz Nazorat va Talabnoma Tizimi",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "^44.2.0",
+    "electron-builder": "^25.0.0"
+  },
+  "build": {
+    "appId": "com.agrobank.qarznazorat",
+    "productName": "QarzNazorat",
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "perMachine": false
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "index.html",
+      "src/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "../backend/dist/backend.exe",
+        "to": "backend/backend.exe"
+      },
+      {
+        "from": "../backend/templates",
+        "to": "backend/templates"
+      }
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<title>Qarz Nazorat va Talabnoma Tizimi</title>
+<link rel="stylesheet" href="src/styles/main.css">
+<script src="src/chart.js"></script>
+</head>
+<body>
+
+<div class="app">
+  <nav class="sidebar" id="sidebar">
+    <div class="sb-title">🏦 Qarz Nazorat</div>
+    <div class="sb-sub">Talabnoma Tizimi</div>
+    <div class="sb-line"></div>
+    <div class="sb-items" id="sb-items"></div>
+  </nav>
+
+  <main class="main" id="main-content">
+    <div class="loading">Yuklanmoqda...</div>
+  </main>
+</div>
+
+<!-- Yadro -> ekranlar -> ishga tushirish. Tartib MUHIM: app.js
+     eng oxirida, chunki u barcha ekran funksiyalariga havola qiladi. -->
+    <script src="src/renderer.js"></script>
+    <script src="src/ekranlar/umumiy.js"></script>
+    <script src="src/ekranlar/bosh_sahifa.js"></script>
+    <script src="src/ekranlar/talabnoma.js"></script>
+    <script src="src/ekranlar/davo.js"></script>
+    <script src="src/ekranlar/bh.js"></script>
+    <script src="src/ekranlar/sugurta.js"></script>
+    <script src="src/ekranlar/sud.js"></script>
+    <script src="src/ekranlar/mib.js"></script>
+    <script src="src/ekranlar/chora.js"></script>
+    <script src="src/ekranlar/f95413.js"></script>
+    <script src="src/ekranlar/tahlil.js"></script>
+    <script src="src/ekranlar/vafot.js"></script>
+    <script src="src/ekranlar/portfel.js"></script>
+    <script src="src/ekranlar/reja.js"></script>
+    <script src="src/ekranlar/sozlamalar.js"></script>
+    <script src="src/ekranlar/app.js"></script>
+</body>
+</html>
